@@ -1,0 +1,170 @@
+/* 全局样式 */
+*{
+    padding: 0px;
+    margin: 0 auto;
+    border: 0px;
+    list-style:none;
+}
+body{
+    width:100%;
+	height:100%;
+    background:url("../images/background.jpg");
+    background-size: 100%;
+}
+/* 头部多啦a梦 */
+.header-top .container img{
+    position: absolute;
+    z-index: -1;
+    top: -15px;
+}
+/* 左侧内容 */
+.left-content ul{
+    padding: 0px;
+}
+.left-content ul li.article{
+    list-style: none;
+    /* border: 2px gray solid; */
+    background-color:#ffffff70;
+    margin-top: 20px;
+    padding: 3%;
+}
+.left-content ul li.article:hover{
+    box-shadow:4px 4px 10px #00000015;
+}
+.left-content ul li.article:first-child{
+    margin-top: 0px;
+}
+/* 文章图片 */
+.left-content ul li.article .pic{
+    float: left;
+    width: 30%;
+    height: 119px;
+    padding: 0px;
+    /* border: 2px solid red; */
+    overflow: hidden;
+}
+.left-content ul li.article .pic img{
+    width: 100%;
+    height: 100%;
+    transition: all 1s;
+}
+.left-content ul li.article .pic img:hover{
+    transform: scale(1.2); 
+    /* 放大 倍数随意 */
+}
+.article-right{
+    float: left;
+    width: 65%;
+    margin-left: 5%;
+    height: 100%;
+}
+
+.article-right .blue-text a{
+    color: dodgerblue;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+}
+.article-right{
+    padding: 0px;
+}
+.article-right p{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: clip;
+    overflow: hidden;
+}
+
+/* 显示两行文字,多余隐藏,兼容火狐代码 */
+.article-right p{position: relative; line-height: 20px; max-height: 40px;overflow: hidden;}
+.article-right p::after{position: absolute; bottom: 0; right: 0; padding-left: 40px;
+background: -webkit-linear-gradient(left, transparent,55%);
+background: -o-linear-gradient(right, transparent, 55%);
+background: -moz-linear-gradient(right, transparent,  55%);
+background: linear-gradient(to right, transparent, 55%);}
+
+ul.article-footer li{
+    text-align: center;
+    float: left;
+    margin-right: 2%;
+}
+ul.article-footer li a{
+    text-decoration: none;
+    color: gray;
+}
+ul.article-footer li a i{
+    margin-right: 0.5rem;
+}
+/* 超小屏幕（手机，小于 768px） */
+@media (max-width: 768px) {
+    .header-top .container img{
+        top: -10%;
+    }
+    .left-content ul li.article .pic img{
+        width:103px;
+        height: 85px;
+    }
+    .article-right h4{
+        font-size: 18px;
+    }
+    .article-right p.article-content{
+        font-size: 12px;
+    }
+    ul.article-footer li{
+        font-size: 12px;
+    }
+}
+/* 小屏幕（平板，大于等于 768px） */
+@media (min-width: 768px) and (max-width: 768px) {
+    .left-content ul li.article .pic img{
+        width:168px;
+        height: 89px;
+    }
+    .article-right h4{
+        font-size: 20px;
+    }
+    .article-right p.article-content{
+        font-size: 12px;
+    }
+    ul.article-footer li{
+        font-size: 12px;
+    }
+}
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media (min-width: 1200px) {
+    .article-right h4{
+        font-size: 23px;
+    }
+    .article-right p.article-content{
+        font-size: 15px;
+    }
+    ul.article-footer li{
+        font-size: 15px;
+    }}
+.footer-page{
+    background-color: #000000;
+}
+.footer-page p{
+    color: #ffffff;
+    text-align: center;
+    line-height: 5rem;
+}
+/* 右侧整体 */
+.right-content{
+    border: 1px solid red;
+    height: 100%;
+}
+
+/* 右侧博客统计 */
+.blog-statistics{
+    background-color: #ffffff80;
+    height: 20%;
+    padding: 5%;
+}
+.blog-statistics:hover{
+    box-shadow:4px 4px 10px #00000015;
+}

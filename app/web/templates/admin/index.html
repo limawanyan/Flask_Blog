@@ -1,0 +1,123 @@
+{% extends 'admin/admin_base.html' %}
+{% block title %} 管理 {% endblock %}
+{% block stylesheet %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+ <!-- /. ROW  -->
+
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary text-center no-boder blue">
+                            <div class="panel-left pull-left blue">
+                                <i class="fa fa-eye fa-5x"></i>
+
+                            </div>
+                            <div class="panel-right">
+                                <h3>16,150</h3>
+                                <strong> 总访问量</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary text-center no-boder blue">
+                            <div class="panel-left pull-left blue">
+                                <i class="fa fa-pencil-square-o fa-5x" aria-hidden="true"></i>
+                            </div>
+
+                            <div class="panel-right">
+                                <h3>25,550 </h3>
+                                <strong> 总博文数</strong>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary text-center no-boder blue">
+                            <div class="panel-left pull-left blue">
+                                <i class="fa fa fa-comments fa-5x"></i>
+
+                            </div>
+                            <div class="panel-right">
+                                <h3>11,225 </h3>
+                                <strong> 总评论数</strong>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-primary text-center no-boder blue">
+                            <div class="panel-left pull-left blue">
+                                <i class="fa fa-users fa-5x"></i>
+
+                            </div>
+                            <div class="panel-right">
+                                <h3>72,525 </h3>
+                                <strong>总用户数</strong>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Line Chart
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-line-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Bar Chart Example
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-bar-chart"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Area Chart
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Donut Chart Example
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-donut-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block script %}
+{{ super() }}
+{% endblock %}

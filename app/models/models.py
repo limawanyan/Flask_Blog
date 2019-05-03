@@ -71,7 +71,6 @@ class ArticleClass(db.Model):
             db.session.commit()
 
 
-
 class BlogInfo(db.Model):
     __tablename__ = 'bloginfo'
     id = db.Column(Integer, primary_key=True)  # id
@@ -88,10 +87,17 @@ class BlogInfo(db.Model):
         db.session.commit()
 
 
+class LogoPhoto(db.Model):
+    __tablename__ = 'logophoto'
+    id = db.Column(Integer,primary_key=True)  # 图片id
+    path = db.Column(String(100),nullable=False)  # 图片路径
+
+
 class Article(db.Model):
     __tablename__ = 'article'
     aid = db.Column(Integer,primary_key=True, autoincrement=True)  # 文章编号
     title = db.Column(String(50))  # 标题
+    logo_photo = db.Column(String(100)) #封面图
     uid = db.Column(Integer,ForeignKey("users.uid"))  # 发布者
     content = db.Column(Text, nullable=False)  # 文章内容
     summary = db.Column(db.Text)  # 摘要
@@ -99,7 +105,7 @@ class Article(db.Model):
     acid = db.Column(Integer, ForeignKey("articleclass.acid"), nullable=False)  # 所属类别
     create_time = db.Column(DateTime, default=func.now())  # 发布时间
     update_time = db.Column(DateTime, default=func.now(),onupdate=func.now)  # 最后修改时间
-    flag = db.Column(Integer, default=1)  # 默认为1  0为隐藏/ 1为显示
+    flag = db.Column(Integer, default=1)  # 默认为1  0为垃圾/ 1为正常 / 2为草稿
 
     # 多对多,article and tag
     tag = db.relationship('Tag', secondary=article_tag, back_populates="article")

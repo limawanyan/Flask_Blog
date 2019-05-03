@@ -1,0 +1,216 @@
+{
+  "_args": [
+    [
+      "sweetalert2",
+      "/home/huzhipeng"
+    ]
+  ],
+  "_from": "sweetalert2@latest",
+  "_hasShrinkwrap": false,
+  "_id": "sweetalert2@8.9.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/sweetalert2",
+  "_nodeVersion": "10.15.3",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/sweetalert2_8.9.0_1556458200749_0.582024678268555"
+  },
+  "_npmUser": {
+    "email": "limon.monte@gmail.com",
+    "name": "limonte"
+  },
+  "_npmVersion": "6.4.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "sweetalert2",
+    "raw": "sweetalert2",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-8.9.0.tgz",
+  "_shasum": "94a46eb79b0cb069f41f0bc7937f020fd843101d",
+  "_shrinkwrap": null,
+  "_spec": "sweetalert2",
+  "_where": "/home/huzhipeng",
+  "author": {
+    "email": "limon.monte@gmail.com",
+    "name": "Limon Monte",
+    "url": "https://limonte.github.io"
+  },
+  "bugs": {
+    "url": "https://github.com/sweetalert2/sweetalert2/issues"
+  },
+  "contributors": [
+    {
+      "name": "Matthew Francis Brunetti",
+      "email": "zenflow87@gmail.com",
+      "url": "https://github.com/zenflow"
+    },
+    {
+      "name": "Morgan Touverey-Quilling",
+      "email": "mtouverey@alembic-dev.com",
+      "url": "https://github.com/toverux"
+    },
+    {
+      "name": "Joseph Schultz",
+      "url": "https://github.com/acupajoe"
+    },
+    {
+      "name": "Sam Turrell",
+      "email": "sam@samturrell.co.uk",
+      "url": "https://github.com/samturrell"
+    },
+    {
+      "name": "Johan Fagerberg",
+      "url": "https://github.com/birjolaxew"
+    },
+    {
+      "name": "Giuseppe Verni",
+      "url": "https://github.com/gverni"
+    }
+  ],
+  "dependencies": {},
+  "description": "A beautiful, responsive, customizable and accessible (WAI-ARIA) replacement for JavaScript's popup boxes, supported fork of sweetalert",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-object-assign": "^7.2.0",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-array-includes": "^2.0.3",
+    "browser-sync": "^2.26.3",
+    "ci-info": "^2.0.0",
+    "custom-event-polyfill": "^1.0.6",
+    "eslint": "^5.12.1",
+    "eslint-plugin-import": "^2.17.2",
+    "execa": "^1.0.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-css2js": "^1.1.2",
+    "gulp-eslint": "^5.0.0",
+    "gulp-if": "^2.0.2",
+    "gulp-noop": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-rollup": "^2.16.2",
+    "gulp-stylelint": "^9.0.0",
+    "gulp-tslint": "^8.1.2",
+    "gulp-typescript": "^5.0.0",
+    "gulp-uglify": "^3.0.0",
+    "jquery": "^3.3.1",
+    "karma": "^4.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-qunit": "^3.0.0",
+    "karma-sauce-launcher": "^2.0.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "^0.0.32",
+    "karma-webpack": "^4.0.0-rc.5",
+    "merge2": "^1.2.3",
+    "promise-polyfill": "^8.1.0",
+    "qunit": "^2.8.0",
+    "replace-in-file": "^4.0.0",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-json": "^4.0.0",
+    "sass": "^1.19.0",
+    "sinon": "^7.2.3",
+    "stylelint": "^10.0.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-order": "^3.0.0",
+    "stylelint-scss": "^3.5.4",
+    "tslint": "^5.12.1",
+    "typescript": "^3.2.4",
+    "webpack": "^4.29.0"
+  },
+  "directories": {},
+  "dist": {
+    "fileCount": 74,
+    "integrity": "sha512-gI+wL44QRbfd6FvRVB8KKLQPhD/8jP3XUNrvYGcSlU7IA09dQtQw3rrLCbM3c+HY0L3O8VTz1Gvu29n8ryIgag==",
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcxarZCRA9TVsSAnZWagAAjYYP/Aym1kC3mQRe2QaFOQVL\ns+moUqyDfVEOzcpnkyw8PjPWabRdlVaw0Du/e7vc4QSIO6OubSjKX768zrMg\nK9AQrYRcpN3Y/z/iDJXcBx1NOucmhxGODj1osSWyuzwe0pqsWzItNElrcpjm\nOeFIPGEWnTHfkKvsCOUHZduMTUTAHBXO4zdIj5NKSZt4vu0qo97uyNETAjR0\nVYHHSVlqwM+ls45L6kwr6ZCsz13MI9rwZayrYzF5UbRsH0up471PglbAEiDo\ndFGVzoVgfLs4rw9XgkB1c+R0qcgJwIGhN78/UtxtzvKsNUW1PEbqA9fbEhS9\n/YPpx79GJWir7ocdETd7E0aft8FoetIF4p5WZatqCmQlmCINUTpXxjqiu8/0\nlQvcDxHjhm5pJPMS75JAG+AUDVqYqBnNQs+ggt43I6vfZQlbhcglYVI4V0J9\nmEXAfwEcvxrw/4skHlRbHbOsrujm+4//2zQctLDFG7J/WTq2IWZmbnYsEs9q\n4GyzmRWbouK17DOPlZ8K3pFKryZ+CWSCjRDMTk3GowwYjPH9lFSt3DPcXvLG\nBdoGrZdQW9CMf9YWTocIIOYglVm6yBlE6ux+F221gJ1c9uLEXJTCnipEln5V\nX1viDhfpRgVULqzGJKXq9EPJL3AGx+a51q6h8IZ6ELJWHRib8BLKdkq2tLQI\nMb9E\r\n=EO99\r\n-----END PGP SIGNATURE-----\r\n",
+    "shasum": "94a46eb79b0cb069f41f0bc7937f020fd843101d",
+    "tarball": "https://registry.npmjs.org/sweetalert2/-/sweetalert2-8.9.0.tgz",
+    "unpackedSize": 537495
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "gitHead": "586e9f8aac47eae184e7445d937271962142e1cc",
+  "homepage": "https://sweetalert2.github.io/",
+  "keywords": [
+    "accessible",
+    "alert",
+    "confirm",
+    "modal",
+    "popup",
+    "prompt",
+    "sweetalert",
+    "sweetalert2",
+    "toast"
+  ],
+  "license": "MIT",
+  "main": "dist/sweetalert2.all.js",
+  "maintainers": [
+    {
+      "name": "acupajoe",
+      "email": "joseph@acupajoe.io"
+    },
+    {
+      "name": "gverni",
+      "email": "g.verni@gmail.com"
+    },
+    {
+      "name": "limonte",
+      "email": "limon.monte@gmail.com"
+    },
+    {
+      "name": "samturrell",
+      "email": "sam@samturrell.co.uk"
+    },
+    {
+      "name": "toverux",
+      "email": "morgan.touverey@outlook.fr"
+    },
+    {
+      "name": "zen_flow",
+      "email": "zenflow87@gmail.com"
+    }
+  ],
+  "name": "sweetalert2",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sweetalert2/sweetalert2.git"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "check": "npm run check:lint && npm run check:require-in-node && npm run check:qunit && npm run check:qunit:minified && npm run check:ts",
+    "check:jest": "jest --ci",
+    "check:jsdelivr": "curl --location 'https://cdn.jsdelivr.net/npm/sweetalert2' 2>&1 | grep --quiet 'window.Swal'",
+    "check:lint": "gulp lint",
+    "check:qunit": "karma start karma.conf.js --single-run",
+    "check:qunit:minified": "karma start karma.conf.js --single-run --minified",
+    "check:qunit:minified:sauce": "karma start karma.conf.js --single-run --minified --sauce",
+    "check:qunit:sauce": "karma start karma.conf.js --single-run --sauce",
+    "check:require-in-node": "node test/require-in-node",
+    "check:sauce": "npm run check:qunit:sauce && npm run check:qunit:minified:sauce",
+    "check:third-party": "npm run check:unpkg && npm run check:jsdelivr && npm run check:wappalyzer",
+    "check:ts": "tsc --lib dom,es6 sweetalert2.d.ts",
+    "check:unpkg": "curl --location 'https://unpkg.com/sweetalert2' 2>&1 | grep --quiet 'window.Swal'",
+    "check:wappalyzer": "curl 'https://api.wappalyzer.com/lookup-basic/v1/?url=https%3A%2F%2Fsweetalert2.github.io' 2>&1 | grep --quiet 'SweetAlert2'",
+    "fix:lint": "eslint --fix .",
+    "start": "gulp develop --continue-on-error --skip-minification --skip-standalone",
+    "test": "npm run build && npm run check"
+  },
+  "types": "sweetalert2.d.ts",
+  "version": "8.9.0"
+}

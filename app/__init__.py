@@ -18,6 +18,7 @@ def create_app(Config):
     login_manager.init_app(app)
     login_manager.session_protection = 'strong'
     login_manager.login_view = 'Web.login'
+    login_manager.login_message = '请先登录哦!'
 
     @login_manager.user_loader
     def load_user(user_id):

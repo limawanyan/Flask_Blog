@@ -1,0 +1,208 @@
+{% extends 'admin/admin_base.html' %}
+{% block title %} 管理 {% endblock %}
+{% block stylesheet %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='quill/quill.snow.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='webuploader/webuploader.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='admin/assets/css/edit_blog.css')}}">
+{% endblock %}
+{% block content %}
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 edit_box">
+
+    <div><span class="h3"><b>写博客</b></span>
+        <button id="cancal" class="btn btn-danger btn-sm"
+                style="float:right;"><i class="fa fa-times "></i> 清空
+        </button>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class=" col-lg-offset-1 col-lg-1 left">
+            封面:
+        </div>
+        <div class="col-lg-3">
+            <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" class="img-responsive" data-toggle="modal"
+                 data-target="#logoPhotoModal">
+        </div>
+    </div>
+    <div class="row form-group " id="title">
+        <div class=" col-lg-offset-1 col-lg-1 left control-label">
+            标题:
+        </div>
+        <div class="col-lg-5">
+
+            <input type="text" class="form-control">
+            <span class="help-block fa fa-times-circle control-label hidden"> 必填</span>
+        </div>
+
+    </div>
+    <div class="row form-group " id="summary">
+        <div class=" col-lg-offset-1 col-lg-1 left control-label">
+            摘要:
+        </div>
+        <div class="col-lg-5">
+
+            <input type="text" class="form-control">
+            <span class="help-block fa fa-times-circle control-label hidden"> 必填</span>
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class=" col-lg-offset-1 col-lg-1 left">
+            类别:
+        </div>
+        <div class="col-lg-5">
+            <select name="" id="input" class="form-control">
+                <option value="">-- Select One --</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="row form-group" id="tags">
+        <div class=" col-lg-offset-1 col-lg-1 left control-label">
+            标签:
+        </div>
+        <div class="col-lg-5">
+            <input type="text" class="form-control">
+            <i class="fa fa-info-circle control-label help-block"> 多个标签之间用";"分隔,最多可添加5个。</i>
+            <span class=" fa fa-times-circle control-label hidden help-block"> 必填</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div id="standalone-container">
+                <div id="toolbar">
+                                    <span class="ql-formats">
+                                        <select class="ql-font"></select>
+                                        <select class="ql-size"></select>
+                                    </span>
+                    <span class="ql-formats">
+                                        <button class="ql-bold"></button>
+                                        <button class="ql-italic"></button>
+                                        <button class="ql-underline"></button>
+                                        <button class="ql-strike"></button>
+                                    </span>
+                    <span class="ql-formats">
+                                        <select class="ql-color"></select>
+                                        <select class="ql-background"></select>
+                                    </span>
+                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub"></button>
+                                        <button class="ql-script" value="super"></button>
+                                    </span>
+                    <span class="ql-formats">
+                                        <button class="ql-header" value="1"></button>
+                                        <button class="ql-header" value="2"></button>
+                                        <button class="ql-blockquote"></button>
+                                        <button class="ql-code-block"></button>
+                                    </span>
+                    <span class="ql-formats">
+                                        <button class="ql-list" value="ordered"></button>
+                                        <button class="ql-list" value="bullet"></button>
+                                        <button class="ql-indent" value="-1"></button>
+                                        <button class="ql-indent" value="+1"></button>
+                                    </span>
+                    <span class="ql-formats">
+                                        <button class="ql-direction" value="rtl"></button>
+                                        <select class="ql-align"></select>
+                                    </span>
+                    <span class="ql-formats">
+                                        <button class="ql-link"></button>
+                                        <button class="ql-image"></button>
+                                        <button class="ql-video"></button>
+                                        <button class="ql-formula"></button>
+                                    </span>
+                    <span class="ql-formats">
+                                        <button class="ql-clean"></button>
+                                    </span>
+                </div>
+                <div id="editor-container"></div>
+            </div>
+
+        </div>
+    </div>
+    <hr/>
+    <div class="text-right">
+        <button type="button" class="fa fa-reply btn btn-success" data-toggle="modal"
+                data-target="#previewModal"> 预览
+        </button>
+        <button type="button" class="fa fa-pencil btn btn-warning" data-type="2"> 存为草稿</button>
+    </div>
+
+
+</div>
+
+
+<!-- 选择封面图模态框 -->
+<div class="modal fade" id="logoPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><b>选择封面图</b></h4>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+                    <div id="picker"><i class="glyphicon glyphicon-plus "> 添加封面</i></div>
+                </div>
+
+                <hr/>
+                <div style="width:100%;height:30rem;overflow:auto;">
+                    <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                </div>
+
+
+            </div>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /选择封面模态框 -->
+
+
+<!-- 预览模态框（Modal） -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">&times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+            </div>
+            <div class="modal-body">在这里添加一些文本</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" data-type="1">发布</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div><!-- /预览模态框 -->
+
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block script %}
+{{ super() }}
+<!-- quill JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+<script src="{{url_for('static',filename='quill/quill.min.js')}}"></script>
+
+<script src="{{url_for('static',filename='webuploader/webuploader.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/assets/js/edit_blog.js')}}"></script>
+{% endblock %}

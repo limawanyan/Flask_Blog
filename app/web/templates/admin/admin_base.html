@@ -2,154 +2,168 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>{% block title %} Blog {% endblock %}-{{ BlogInfo.query.first().title }}</title>
-     {% block stylesheet %}
-        <link rel="shortcut icon" href="{{url_for('static',filename='images/logo.ico')}}" type="image/x-icon" />
+    {% block stylesheet %}
+    <link rel="shortcut icon" href="{{url_for('static',filename='images/logo.ico')}}" type="image/x-icon"/>
     <!-- Bootstrap Styles-->
-    <link href="{{url_for('static',filename='admin/assets/css/bootstrap.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static',filename='admin/assets/css/bootstrap.css')}}" rel="stylesheet"/>
     <!-- FontAwesome Styles-->
-    <link href="{{url_for('static',filename='admin/assets/css/font-awesome.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static',filename='admin/assets/css/font-awesome.css')}}" rel="stylesheet"/>
     <!-- Morris Chart Styles-->
-    <link href="{{url_for('static',filename='admin/assets/js/morris/morris-0.4.3.min.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static',filename='admin/assets/js/morris/morris-0.4.3.min.css')}}" rel="stylesheet"/>
     <!-- Custom Styles-->
-    <link href="{{url_for('static',filename='admin/assets/css/custom-styles.css')}}" rel="stylesheet" />
+    <link href="{{url_for('static',filename='admin/assets/css/custom-styles.css')}}" rel="stylesheet"/>
     <!-- Google Fonts-->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
     <link rel="stylesheet" href="{{url_for('static',filename='admin/assets/js/Lightweight-Chart/cssCharts.css')}}">
     {% endblock %}
 </head>
 
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{url_for('Web.admin')}}"><strong>{{ BlogInfo.query.first().title }}</strong></a>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{url_for('Web.admin')}}" alt="刷新~"><strong>{{ BlogInfo.query.first().title
+                }}</strong></a>
 
-                <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
-            </div>
+            <div id="sideNav" href=""><i class="fa fa-caret-right"></i></div>
+        </div>
 
-            <ul class="nav navbar-top-links navbar-right" style="margin-right: 1%">
+        <ul class="nav navbar-top-links navbar-right" style="margin-right: 1%">
+            <li>
+                {% if current_user.is_authenticated %}
+                <span style="color: white"><b>Hi {{ current_user.username }} !</b></span>
+                {% endif %}
+            </li>
+            <!-- /.dropdown -->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户中心</a>
+                    </li>
+                    <li><a href="{{url_for('Web.index')}}"><i class="fa fa-flag fa-fw"></i> 网站前台</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="{{url_for('Web.logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li><a href="{{url_for('Web.admin')}}"><i class="fa fa-home"></i> 主页</a></li>
+
                 <li>
-                    {% if current_user.is_authenticated %}
-                    <span style="color: white"><b>Hi {{ current_user.username }} !</b></span>
-                    {% endif %}
-                </li>
-                <!-- /.dropdown -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 用户中心</a>
+                    <a href="#"><i class="fa fa-book"></i> 博文管理<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{url_for('Web.editblog')}}">发表博文</a>
                         </li>
-                        <li><a href="{{url_for('Web.index')}}"><i class="fa fa-flag fa-fw"></i> 网站前台</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> 设置</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="{{url_for('Web.logout')}}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li>
+                            <a href="#">管理博文</a>
                         </li>
                     </ul>
-                    <!-- /.dropdown-user -->
                 </li>
-                <!-- /.dropdown -->
+
+
+                <li>
+                    <a href="#"><i class="fa fa-cog"></i> 博客定制<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="#">基本信息</a>
+                        </li>
+                        <li>
+                            <a href="#">博文分类</a>
+                        </li>
+                        <li>
+                            <a href="#">博文标签</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="empty.html"><i class="fa fa-comments"></i>评论管理</a>
+                </li>
+                <li>
+                    <a href="empty.html"><i class="fa fa-user fa-fw"></i>用户管理</a>
+                </li>
+
+                <li>
+                    <a href="empty.html"><i class="fa fa-picture-o"></i>本地图库</a>
+                </li>
+
+                <li>
+                    <a href="{{url_for('Web.index')}}"><i class="fa fa-desktop"></i>前台页面</a>
+                </li>
+
             </ul>
-        </nav>
-        <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
 
-                    <li>
-                        <a href="#"><i class="fa fa-book"></i> 博文管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">发表博文</a>
-                            </li>
-                            <li>
-                                <a href="#">管理博文</a>
-                            </li>
-                        </ul>
-                    </li>
+        </div>
+    </nav>
+    <div id="page-wrapper">
+        <div class="header page-header">
 
 
-                    <li>
-                        <a href="#"><i class="fa fa-cog"></i> 博客定制<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">基本信息</a>
-                            </li>
-                            <li>
-                                <a href="#">博文分类</a>
-                            </li>
-                            <li>
-                                <a href="#">博文标签</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="empty.html"><i class="fa fa-comments"></i>评论管理</a>
-                    </li>
-                    <li>
-                        <a href="empty.html"><i class="fa fa-user fa-fw"></i>用户管理</a>
-                    </li>
-
-                </ul>
-
-            </div>
-        </nav>
-        <div id="page-wrapper">
-            <div class="header page-header">
-
-
-            </div>
-            <div id="page-inner">
+        </div>
+        <div id="page-inner">
 
             {% block content %}{% endblock %}
 
-             </div>
-            </div>
-    </div>
-            <!-- /. ROW  -->
-
-            <footer>
-            {% block footer %}{% endblock %}
-            </footer>
-
         </div>
-        <!-- /. PAGE INNER  -->
     </div>
-    <!-- /. PAGE WRAPPER  -->
-    </div>
-    {% block script %}
-    <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
-    <script src="{{url_for('static',filename='admin/assets/js/jquery-1.10.2.js')}}"></script>
-    <!-- Bootstrap Js -->
-    <script src="{{url_for('static',filename='admin/assets/js/bootstrap.min.js')}}"></script>
+</div>
+<!-- /. ROW  -->
 
-    <!-- Metis Menu Js -->
-    <script src="{{url_for('static',filename='admin/assets/js/jquery.metisMenu.js')}}"></script>
-    <!-- Morris Chart Js -->
-    <script src="{{url_for('static',filename='admin/assets/js/morris/raphael-2.1.0.min.js')}}"></script>
-    <script src="{{url_for('static',filename='admin/assets/js/morris/morris.js')}}"></script>
-    <script src="{{url_for('static',filename='admin/assets/js/easypiechart.js')}}"></script>
-    <script src="{{url_for('static',filename='admin/assets/js/easypiechart-data.js')}}"></script>
+<footer>
+    {% block footer %}{% endblock %}
+</footer>
 
-    <script src="{{url_for('static',filename='admin/assets/js/Lightweight-Chart/jquery.chart.js')}}"></script>
+</div>
+<!-- /. PAGE INNER  -->
+</div>
+<!-- /. PAGE WRAPPER  -->
+</div>
+{% block script %}
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
+<script src="{{url_for('static',filename='admin/assets/js/jquery-1.10.2.js')}}"></script>
+<!-- Bootstrap Js -->
+<script src="{{url_for('static',filename='admin/assets/js/bootstrap.min.js')}}"></script>
 
-    <!-- Custom Js -->
-    <script src="{{url_for('static',filename='admin/assets/js/custom-scripts.js')}}"></script>
-    {% endblock %}
+<!-- Metis Menu Js -->
+<script src="{{url_for('static',filename='admin/assets/js/jquery.metisMenu.js')}}"></script>
+<!-- Morris Chart Js -->
+<script src="{{url_for('static',filename='admin/assets/js/morris/raphael-2.1.0.min.js')}}"></script>
+<script src="{{url_for('static',filename='admin/assets/js/morris/morris.js')}}"></script>
+<script src="{{url_for('static',filename='admin/assets/js/easypiechart.js')}}"></script>
+<script src="{{url_for('static',filename='admin/assets/js/easypiechart-data.js')}}"></script>
+
+<script src="{{url_for('static',filename='admin/assets/js/Lightweight-Chart/jquery.chart.js')}}"></script>
+
+<!-- Custom Js -->
+<script src="{{url_for('static',filename='admin/assets/js/custom-scripts.js')}}"></script>
+
+<!-- SweetAlert2-->
+<script src="{{url_for('static',filename='sweetalert2/dist/sweetalert2.all.min.js')}}"></script>
+
+{% endblock %}
 </body>
 
 </html>

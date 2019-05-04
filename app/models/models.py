@@ -87,12 +87,6 @@ class BlogInfo(db.Model):
         db.session.commit()
 
 
-class LogoPhoto(db.Model):
-    __tablename__ = 'logophoto'
-    id = db.Column(Integer,primary_key=True)  # 图片id
-    path = db.Column(String(100),nullable=False)  # 图片路径
-
-
 class Article(db.Model):
     __tablename__ = 'article'
     aid = db.Column(Integer,primary_key=True, autoincrement=True)  # 文章编号

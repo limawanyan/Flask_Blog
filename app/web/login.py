@@ -11,7 +11,7 @@ def login():
       form = LoginFrom(request.form)
       if form.validate_on_submit():
          user = User.query.filter_by(email=form.email.data).first()
-         if user is not None and user.check_password(form.password.data):
+         if user is not None and user.check_password(form.password.data) and user.flag == 1:
             login_user(user)
             # flash('登录成功!欢迎回来,%s'% user.username,'success')
             return redirect(request.args.get('next') or url_for('Web.admin'))

@@ -22,8 +22,9 @@
             封面:
         </div>
         <div class="col-lg-3">
-            <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" class="img-responsive" data-toggle="modal"
-                 data-target="#logoPhotoModal">
+            <img src="" class="img-responsive"
+                 data-toggle="modal" title="点击更换封面图"
+                 data-target="#logoPhotoModal" id="selectlogo">
         </div>
     </div>
     <div class="row form-group " id="title">
@@ -54,8 +55,7 @@
             类别:
         </div>
         <div class="col-lg-5">
-            <select name="" id="input" class="form-control">
-                <option value="">-- Select One --</option>
+            <select name="" id="articleclass" class="form-control">
             </select>
         </div>
 
@@ -152,17 +152,8 @@
                 </div>
 
                 <hr/>
-                <div style="width:100%;height:30rem;overflow:auto;">
-                    <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
-                     <img src="{{url_for('static',filename='images/duolaiameng.gif')}}" alt="" style="width:30%;margin: 1%;">
+                <div style="width:100%;height:30rem;overflow:auto;" id="logobox">
+
                 </div>
 
 
@@ -181,7 +172,7 @@
                 <button type="button" class="close" data-dismiss="modal"
                         aria-hidden="true">&times;
                 </button>
-                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                <h4 class="modal-title" id="myModalLabel">博文预览</h4>
             </div>
             <div class="modal-body">在这里添加一些文本</div>
             <div class="modal-footer">
@@ -205,4 +196,99 @@
 
 <script src="{{url_for('static',filename='webuploader/webuploader.min.js')}}"></script>
 <script src="{{url_for('static',filename='admin/assets/js/edit_blog.js')}}"></script>
+
+<script>
+    // WebUploader
+    var uploader;
+    //在点击弹出模态框的时候再初始化WebUploader，解决点击上传无反应问题
+    $("#logoPhotoModal").on("shown.bs.modal", function () {
+
+        uploader = WebUploader.create({
+            // 选完文件后，是否自动上传。
+            auto: true,
+            // swf文件路径
+            swf: './static/webuploader/Uploader.swf',
+            // 文件接收服务端。
+            server: '{{url_for("Web.logo_uploader")}}',
+            // 选择文件的按钮。可选。
+            // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+            pick: '#picker',
+            //只允许上传图片
+            fileSingleSizeLimit: 5 * 1024 * 1024,   //设定单个文件大小
+            accept: {// 只允许选择图片文件格式
+                title: 'Images',
+                extensions: 'gif,jpg,png,jpeg',
+                mimeTypes: 'image/*'
+            },
+            formData: {
+                csrf_token: '{{ csrf_token()}}',
+                save_type:'logo'
+            }
+
+        });
+        /**
+         * 验证文件格式以及文件大小
+         */
+        uploader.on("error", function (type) {
+            if (type == "Q_TYPE_DENIED") {
+                Swal.fire({
+                title: 'Error!',
+                text: '请上传JPG、PNG、JPEG、GIF格式文件!',
+                type: 'error',
+                confirmButtonText: 'OK'
+            });
+            } else if (type == "F_EXCEED_SIZE") {
+                 Swal.fire({
+                title: 'Error!',
+                text: '文件大小不要超过5M!',
+                type: 'error',
+                confirmButtonText: 'OK'
+            });
+            }
+        });
+
+        // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+        uploader.on('uploadSuccess', function (file, response) {
+            if (response.code != "200") {
+                Swal.fire({
+                title: '上传失败!',
+                text: '上传参数出现问题!',
+                type: 'error',
+                confirmButtonText: 'OK'
+            });
+            }
+            else {
+                 Swal.fire({
+                title: '上传成功',
+                text: '新的封面图已经上传成功!',
+                type: 'success',
+                confirmButtonText: 'OK'
+            });
+
+                   // 获取返回信息
+            var name = response.data.img;
+            var image = "<img title=\"点击更换封面图\" onclick=\"selectImgPath(this)\" src=\"/static/upload/logo/" + name + " \">";
+            $('#logobox').prepend(image);
+            }
+
+        });
+
+        uploader.on('uploadError', function (file) { // 上传过程中发生异常，调用该方法
+            Swal.fire({
+                title: 'Error!',
+                text: '上传出现错误!',
+                type: 'error',
+                confirmButtonText: 'OK'
+            })
+        });
+
+    });
+
+    //关闭模态框销毁WebUploader，解决再次打开模态框时按钮越变越大问题
+    $('#logoPhotoModal').on('hide.bs.modal', function () {
+        uploader.destroy();
+    });
+    // WebUploader
+
+</script>
 {% endblock %}

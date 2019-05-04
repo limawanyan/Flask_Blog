@@ -18,3 +18,8 @@ input{
     height: 30rem;
 
 }
+#logobox>img{
+    width: 30%;
+    margin: 1%;
+    cursor:pointer;
+}

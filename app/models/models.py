@@ -101,6 +101,15 @@ class Article(db.Model):
     update_time = db.Column(DateTime, default=func.now(),onupdate=func.now)  # 最后修改时间
     flag = db.Column(Integer, default=1)  # 默认为1  0为垃圾/ 1为正常 / 2为草稿
 
+    def __init__(self,title,logo_photo,uid,content,summary,acid,flag):
+        self.title = title
+        self.logo_photo = logo_photo
+        self.uid = uid
+        self.content = content
+        self.summary = summary
+        self.acid = acid
+        self.flag =flag
+
     # 多对多,article and tag
     tag = db.relationship('Tag', secondary=article_tag, back_populates="article")
     # 多对一,user and article,class and article
@@ -113,6 +122,9 @@ class Tag(db.Model):
     __tablename__ = "tag"
     tid = db.Column(Integer, primary_key=True, autoincrement=True)  # 标签编号
     name = db.Column(String(20), nullable=False)  # 标签名称
+
+    def __init__(self, name):
+        self.name = name
 
     article = db.relationship('Article', secondary=article_tag, back_populates="tag")
 

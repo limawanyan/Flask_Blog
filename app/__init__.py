@@ -26,12 +26,12 @@ def create_app(Config):
 
     db.init_app(app)
     with app.app_context():
-        # db.drop_all()
+        db.drop_all()
         db.create_all()
-        # BlogInfo.insert_blog_info()
-        # User.insert_admin('2388962411@qq.com','huzhipeng','123456')
-        # ArticleClass.insert_class()
-        # BlogView.insert_view()
+        BlogInfo.insert_blog_info()
+        User.insert_admin('2388962411@qq.com','huzhipeng','123456')
+        ArticleClass.insert_class()
+        BlogView.insert_view()
 
     return app
 

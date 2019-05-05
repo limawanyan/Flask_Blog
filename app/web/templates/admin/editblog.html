@@ -33,7 +33,7 @@
         </div>
         <div class="col-lg-5">
 
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="editor-title">
             <span class="help-block fa fa-times-circle control-label hidden"> 必填</span>
         </div>
 
@@ -44,7 +44,7 @@
         </div>
         <div class="col-lg-5">
 
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="editor-summary" placeholder="取其精华,不能少于20个字符哦~">
             <span class="help-block fa fa-times-circle control-label hidden"> 必填</span>
 
         </div>
@@ -65,7 +65,7 @@
             标签:
         </div>
         <div class="col-lg-5">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" id="editor-tags">
             <i class="fa fa-info-circle control-label help-block"> 多个标签之间用";"分隔,最多可添加5个。</i>
             <span class=" fa fa-times-circle control-label hidden help-block"> 必填</span>
         </div>
@@ -125,10 +125,10 @@
     </div>
     <hr/>
     <div class="text-right">
-        <button type="button" class="fa fa-reply btn btn-success" data-toggle="modal"
-                data-target="#previewModal"> 预览
+        <button type="button" class="fa fa-reply btn btn-success"
+                data-target="#previewModal" id="previewbtn"> 预览
         </button>
-        <button type="button" class="fa fa-pencil btn btn-warning" data-type="2"> 存为草稿</button>
+        <button type="button" class="fa fa-pencil btn btn-warning" data-type="2" id="savedraft"> 存为草稿</button>
     </div>
 
 
@@ -174,10 +174,36 @@
                 </button>
                 <h4 class="modal-title" id="myModalLabel">博文预览</h4>
             </div>
-            <div class="modal-body">在这里添加一些文本</div>
+            <div class="modal-body" style="overflow: hidden;">
+
+                <div class="previewbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h4 class="text-center"><b id="preview-title">我的第一篇博客</b></h4>
+                    <div class="blog-msg text-center">
+                        <span class="glyphicon glyphicon-user"> 作者:{% if current_user.is_authenticated %}{{ current_user.username }}{% endif %}</span>
+                        <span class="glyphicon glyphicon-time" id="preview-time"> 发布日期:2019-05-01</span>
+                        <span class="glyphicon glyphicon-folder-open"></span> 分类:<a href="#" id="preview-actype">pyhton</a>
+                    </div>
+                    <!-- 文章内容开始 -->
+                    <div class="blog-content col-xs-12 col-sm-12 col-md-12 col-lg-12"">
+
+                    </div>
+                    <div class="content-footer " >
+
+                        <div><span class="glyphicon glyphicon-time" id="preview-uptime"> 博文最后更新时间:2018年7月31日下午3点01分</span></div>
+                        <div class="blog_ui_tags">
+                            <div class="items">
+                                <i class="glyphicon glyphicon-tags text-left"></i> 标签:&nbsp;&nbsp;
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary" data-type="1">发布</button>
+                <button type="button" class="btn btn-primary" data-type="1" id="saverelease">发布</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -222,7 +248,7 @@
             },
             formData: {
                 csrf_token: '{{ csrf_token()}}',
-                save_type:'logo'
+                save_type: 'logo'
             }
 
         });
@@ -232,18 +258,18 @@
         uploader.on("error", function (type) {
             if (type == "Q_TYPE_DENIED") {
                 Swal.fire({
-                title: 'Error!',
-                text: '请上传JPG、PNG、JPEG、GIF格式文件!',
-                type: 'error',
-                confirmButtonText: 'OK'
-            });
+                    title: 'Error!',
+                    text: '请上传JPG、PNG、JPEG、GIF格式文件!',
+                    type: 'error',
+                    confirmButtonText: 'OK'
+                });
             } else if (type == "F_EXCEED_SIZE") {
-                 Swal.fire({
-                title: 'Error!',
-                text: '文件大小不要超过5M!',
-                type: 'error',
-                confirmButtonText: 'OK'
-            });
+                Swal.fire({
+                    title: 'Error!',
+                    text: '文件大小不要超过5M!',
+                    type: 'error',
+                    confirmButtonText: 'OK'
+                });
             }
         });
 
@@ -251,24 +277,23 @@
         uploader.on('uploadSuccess', function (file, response) {
             if (response.code != "200") {
                 Swal.fire({
-                title: '上传失败!',
-                text: '上传参数出现问题!',
-                type: 'error',
-                confirmButtonText: 'OK'
-            });
-            }
-            else {
-                 Swal.fire({
-                title: '上传成功',
-                text: '新的封面图已经上传成功!',
-                type: 'success',
-                confirmButtonText: 'OK'
-            });
+                    title: '上传失败!',
+                    text: '上传参数出现问题!',
+                    type: 'error',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: '上传成功',
+                    text: '新的封面图已经上传成功!',
+                    type: 'success',
+                    confirmButtonText: 'OK'
+                });
 
-                   // 获取返回信息
-            var name = response.data.img;
-            var image = "<img title=\"点击更换封面图\" onclick=\"selectImgPath(this)\" src=\"/static/upload/logo/" + name + " \">";
-            $('#logobox').prepend(image);
+                // 获取返回信息
+                var name = response.data.img;
+                var image = "<img title=\"点击更换封面图\" onclick=\"selectImgPath(this)\" src=\"/static/upload/logo/" + name + " \">";
+                $('#logobox').prepend(image);
             }
 
         });

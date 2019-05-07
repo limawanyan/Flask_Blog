@@ -248,16 +248,9 @@ window.onload = function () {
         return fmt;
     };
 
-    // 选择封面图
-    function selectImgPath(img) {
-        var path = img.src;
-        $('#selectlogo').attr('src', path);
-        $("#logoPhotoModal").modal('hide');
-    };
-
     // 发布或保存为草稿
-   $('#saverelease,#savedraft').on('click',function () {
-        if (norm_checking()){
+    $('#saverelease,#savedraft').on('click', function () {
+        if (norm_checking()) {
             let title = $('#editor-title').val().trim();
             let summary = $('#editor-summary').val().trim();
             let tags = $('#editor-tags').val();
@@ -269,34 +262,42 @@ window.onload = function () {
                 type: "post",
                 url: "/admin/api/saveBlog",
                 contentType: "application/json; charset=utf-8",
-                data:JSON.stringify({'title':title,'summary':summary,'tags':tags,'content':content,'flag':flag,'acid':acid,'logo':logo}),
+                data: JSON.stringify({
+                    'title': title,
+                    'summary': summary,
+                    'tags': tags,
+                    'content': content,
+                    'flag': flag,
+                    'acid': acid,
+                    'logo': logo
+                }),
                 dataType: "json",
                 async: true,
                 success: function (data) {
-                    if (data.code = "200"){
-                        if (flag == "1"){
+                    if (data.code = "200") {
+                        if (flag == "1") {
                             Swal.fire({
-                                    title: '博文发布成功!',
-                                    text: '博文已发布成功,可前往前台首页查看O(∩_∩)O~~',
-                                    type: 'success',
-                                    confirmButtonText: 'OK'
-                                });
+                                title: '博文发布成功!',
+                                text: '博文已发布成功,可前往前台首页查看O(∩_∩)O~~',
+                                type: 'success',
+                                confirmButtonText: 'OK'
+                            });
                             $("#previewModal").modal('hide');
                         } else {
                             Swal.fire({
-                                    title: '已保存为草稿!',
-                                    text: '博文已存入草稿箱,可前往草稿箱查看O(∩_∩)O~~',
-                                    type: 'success',
-                                    confirmButtonText: 'OK'
-                                });
+                                title: '已保存为草稿!',
+                                text: '博文已存入草稿箱,可前往草稿箱查看O(∩_∩)O~~',
+                                type: 'success',
+                                confirmButtonText: 'OK'
+                            });
                         }
-                    }else {
+                    } else {
                         Swal.fire({
-                                    title: 'Error!',
-                                    text: '博文已存入草稿箱,可前往草稿箱查看O(∩_∩)O~~',
-                                    type: data.message,
-                                    confirmButtonText: 'OK'
-                                });
+                            title: 'Error!',
+                            text: '博文已存入草稿箱,可前往草稿箱查看O(∩_∩)O~~',
+                            type: data.message,
+                            confirmButtonText: 'OK'
+                        });
                     }
 
                 },
@@ -310,9 +311,8 @@ window.onload = function () {
                 }
             });
 
-        }
-        else{
-             Swal.fire({
+        } else {
+            Swal.fire({
                 title: 'Error!',
                 text: '请填写规范后预览!',
                 type: 'error',
@@ -323,5 +323,11 @@ window.onload = function () {
 
 };
 
+// 选择封面图
+function selectImgPath(img) {
+    var path = img.src;
+    $('#selectlogo').attr('src', path);
+    $("#logoPhotoModal").modal('hide');
+};
 
 

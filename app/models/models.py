@@ -57,8 +57,7 @@ class ArticleClass(db.Model):
     fid = db.Column(Integer,ForeignKey('articleclass.acid'))  # 父级分类编号
     order = db.Column(Integer,default=0)  # 排序
     hide = db.Column(db.Boolean,default=True)  # 是否隐藏
-
-    article = db.relationship('Article', back_populates='aclass')
+    articles = db.relationship('Article', backref='articleclass', lazy='dynamic')
 
     @staticmethod
     def insert_class():
@@ -95,11 +94,23 @@ class Article(db.Model):
     uid = db.Column(Integer,ForeignKey("users.uid"))  # 发布者
     content = db.Column(Text, nullable=False)  # 文章内容
     summary = db.Column(db.Text)  # 摘要
-    num_of_view = db.Column(Integer, default=0)  # 点击数量
+    num_of_view = db.Column(Integer, default=0)  # 浏览量
     acid = db.Column(Integer, ForeignKey("articleclass.acid"), nullable=False)  # 所属类别
     create_time = db.Column(DateTime, default=func.now())  # 发布时间
-    update_time = db.Column(DateTime, default=func.now(),onupdate=func.now)  # 最后修改时间
+    update_time = db.Column(DateTime, default=func.now())  # 最后修改时间
     flag = db.Column(Integer, default=1)  # 默认为1  0为垃圾/ 1为正常 / 2为草稿
+
+    # 多对多,article and tag
+    # tag = db.relationship('Tag', secondary=article_tag, backref="article")
+    # 多对一,user and article,class and article
+    user = db.relationship('User', back_populates='article')
+    comment = db.relationship('Comment', back_populates='article')
+
+    @staticmethod
+    def add_view(article):
+        article.num_of_view += 1
+        db.session.add(article)
+        db.session.commit()
 
     def __init__(self,title,logo_photo,uid,content,summary,acid,flag):
         self.title = title
@@ -110,23 +121,15 @@ class Article(db.Model):
         self.acid = acid
         self.flag =flag
 
-    # 多对多,article and tag
-    tag = db.relationship('Tag', secondary=article_tag, back_populates="article")
-    # 多对一,user and article,class and article
-    user = db.relationship('User', back_populates='article')
-    aclass = db.relationship('ArticleClass',back_populates='article')
-    comment = db.relationship('Comment', back_populates='article')
 
 
 class Tag(db.Model):
     __tablename__ = "tag"
     tid = db.Column(Integer, primary_key=True, autoincrement=True)  # 标签编号
     name = db.Column(String(20), nullable=False)  # 标签名称
-
+    articles = db.relationship('Article', secondary=article_tag, backref="tag",lazy='dynamic')
     def __init__(self, name):
         self.name = name
-
-    article = db.relationship('Article', secondary=article_tag, back_populates="tag")
 
 
 class Comment(db.Model):

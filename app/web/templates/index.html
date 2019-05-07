@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% import "_macros.html" as macros %}
 {% block title %} Blog {% endblock %}
 {% block stylesheet %}
 {{ super() }}
@@ -8,15 +9,11 @@
 
 <!-- 分页 -->
 <div class="col-lg-12 text-center">
-    <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-    </ul>
+   {% if endpoint == '.index' %}
+        {{ macros.pagination_widget(pagination, endpoint) }}
+    {% else %}
+        {{ macros.pagination_widget(pagination, endpoint, id=id) }}
+    {% endif %}
 </div>
 
 {% endblock %}

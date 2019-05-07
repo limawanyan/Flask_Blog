@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% import "_macros.html" as macros %}
+{% block title %} Blog {% endblock %}
+{% block stylesheet %}
+{{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/article_details.css')}}">
+{% endblock %}
+{% block leftcontent %}
+<div class="detailsbox col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h4 class="text-center"><b>{{article.title}}</b></h4>
+    <div class="blog-msg text-center">
+        <span class="glyphicon glyphicon-user"></span> 作者:{{article.user.username}}
+        <span class="glyphicon glyphicon-time"></span> 发布日期:{{ moment(article.create_time.date()).format('LL') }}
+        <span class="glyphicon glyphicon-eye-open"></span> 浏览量:{{article.num_of_view}}
+        <span class="glyphicon glyphicon-folder-open"></span> 分类:<a href="{{url_for('Web.articleClass',id=article.articleclass.acid)}}">{{article.articleclass.name}}</a>
+    </div>
+    <!-- 文章内容开始 -->
+    <div class="blog-content">
+                  {{article.content | safe}}
+    <!-- 文章内容结束 -->
+    <div class="content-footer">
+
+        <div><span class="glyphicon glyphicon-time"></span> 博文最后更新时间:{{ moment(article.update_time).format('LLL') }}</div>
+        <div class="blog_ui_tags">
+            <div class="items">
+                <i class="glyphicon glyphicon-tags text-left"></i> 标签:&nbsp;&nbsp;
+                {% for i in article.tag %}
+                    <a href="{{url_for('Web.articleTag',id=i.tid)}}">{{i.name}}</a>
+                {% endfor %}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block rightcontent %}
+{% include "rightcontent.html" %}
+{% endblock %}
+{% block script %}
+{{super()}}
+{% endblock %}

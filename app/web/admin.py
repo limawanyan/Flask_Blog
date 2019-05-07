@@ -51,6 +51,7 @@ def getLogoUrl():
 def getClass():
    articleclass = ArticleClass.query.filter(ArticleClass.fid!=None,ArticleClass.hide==True).all()
    articleclass = [ json.dumps(ArticleClassModel(i).__dict__,ensure_ascii=False) for i in articleclass]
+
    return xjson.json_success('获取成功!',data={"class":articleclass})
 
 @web.route('/admin/api/saveBlog', methods=['POST'])
@@ -86,3 +87,4 @@ def saveBlog():
    db.session.commit()
 
    return xjson.json_success("成功!")
+

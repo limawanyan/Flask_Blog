@@ -1,0 +1,42 @@
+.detailsbox{
+    background: white;
+    border-radius: 10px;
+    padding: 2% 0;
+    margin-bottom: 5%;
+}
+.blog-msg{
+    padding: 1% 5%;
+    border: 0.1rem dashed gainsboro;
+}
+.blog-msg>span{
+    margin-left: 1%;
+}
+.blog-msg a{
+    color: black;
+}
+.detailsbox .blog-content,.detailsbox .content-footer{
+    padding: 2%;
+    word-break:break-all;
+}
+/* *标签样式 * */
+.blog_ui_tags .items a {
+    font-size: 12px;
+    color: #FFF;
+    text-decoration: none;
+    background-color: #f6f6f6;
+    margin-right: 1%;
+    padding: 0.5% 1%;
+    border-radius: 2px;
+}
+.blog_ui_tags .items{
+    margin: 1%;
+    padding: 1% 0px;
+    border-top: 1px gainsboro solid;
+    border-bottom: 1px gainsboro solid;
+    overflow: hidden;
+}
+.detailsbox img{
+    display: block;
+    height: auto;
+    max-width: 100%;
+}

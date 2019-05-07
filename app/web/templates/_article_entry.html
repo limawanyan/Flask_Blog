@@ -1,5 +1,5 @@
 <ul>
-
-{% include '_article_info.html' %}
-
+{% for article in articles %}
+    {% include '_article_info.html' %}
+{% endfor %}
 </ul>

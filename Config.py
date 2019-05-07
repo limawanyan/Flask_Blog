@@ -11,3 +11,5 @@ class Config:
 
     LOGO_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)),"app/static/upload/logo/")
     BLOG_DIR = os.path.join(os.path.abspath(os.path.dirname(__file__)), "app/static/upload/blog/")
+
+    PAGE_ITEM_NUM = 6

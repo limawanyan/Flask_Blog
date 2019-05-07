@@ -1,6 +1,6 @@
 from app import create_app
 from Config import Config
-from app.models.models import BlogInfo,ArticleClass,BlogView
+from app.models.models import BlogInfo,ArticleClass,BlogView,Article
 
 if __name__ == '__main__':
     app = create_app(Config)
@@ -9,5 +9,6 @@ if __name__ == '__main__':
     app.add_template_global(ArticleClass,'ArticleClass')
     app.add_template_global(len,'len')
     app.add_template_global(BlogView, 'BlogView')
+    app.add_template_global(Article, 'Article')
 
     app.run()

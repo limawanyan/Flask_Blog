@@ -49,7 +49,7 @@
                 <!-- 导航栏内容 -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active hidden-xs"><a href="#">首页</a></li>
+                        <li class="active hidden-xs"><a href="{{url_for('Web.index')}}">首页</a></li>
                        {% for menu in ArticleClass.query.filter(ArticleClass.fid==None ,ArticleClass.hide == True).order_by(ArticleClass.order.asc()).all() %}
                             {% if len(ArticleClass.query.filter(ArticleClass.fid==menu.acid).all()) %}
                                 <li class="dropdown">
@@ -57,12 +57,12 @@
                                         aria-haspopup="true" aria-expanded="false">{{ menu.name }} <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                          {% for submenu in ArticleClass.query.filter(ArticleClass.fid==menu.acid).all() %}
-                                             <li><a href="#">{{ submenu.name }}</a></li>
+                                             <li><a href="{{url_for('Web.articleClass',id=submenu.acid)}}">{{ submenu.name }}</a></li>
                                          {% endfor %}
                                     </ul>
                                 </li>
                             {% else %}
-                            <li><a href="#">{{ menu.name }}</a></li>
+<!--                            <li><a href="#">{{ menu.name }}</a></li>-->
                             {% endif %}
                        {% endfor %}
                     </ul>
@@ -86,7 +86,7 @@
         <!-- 左侧文章列表 -->
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 left-content">
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 left-content">
                     {% block leftcontent %}{% endblock %}
                 </div>
 
@@ -111,6 +111,8 @@
     <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
     <script src="{{url_for('static',filename='js/index.js')}}"></script>
     <script src="{{url_for('static',filename='js/time.js')}}"></script>
+    {{ moment.include_moment() }}
+    {{ moment.lang('zh-cn') }}
 {% endblock %}
 </body>
 

@@ -3,6 +3,7 @@
 {% block title %} Blog {% endblock %}
 {% block stylesheet %}
 {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static',filename='quill/quill.snow.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='css/article_details.css')}}">
 {% endblock %}
 {% block leftcontent %}
@@ -16,7 +17,9 @@
     </div>
     <!-- 文章内容开始 -->
     <div class="blog-content">
+        <div class="ql-editor">
                   {{article.content | safe}}
+        </div>
     <!-- 文章内容结束 -->
     <div class="content-footer">
 

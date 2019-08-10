@@ -88,3 +88,23 @@ def saveBlog():
 
    return xjson.json_success("成功!")
 
+
+@web.route('/admin/ManageActicle', methods=['GET'])
+@login_required
+def manageActicle():
+   page = request.args.get('page',1,type=int)
+   pagination = Article.query.order_by(Article.create_time.desc()).paginate(
+      page,10,error_out=False)
+   articles = pagination.items
+   return render_template("/admin/manage_article.html",articles=articles,pagination=pagination,endpoint='.manageActicle')
+
+
+@web.route('/admin/DeleteArticle/<int:id>/', methods=['GET'])
+@login_required
+def deleteArticle(id):
+   article = Article.query.filter(Article.aid ==id).first()
+   if not article:
+      return xjson.json_params_error("删除失败！")
+   db.session.delete(article)
+   db.session.commit()
+   return xjson.json_success("删除成功！")

@@ -45,12 +45,12 @@ $(function () {
 
     window.resize = function () {
         footerPosition();
-    }
+    };
 
     // 标签颜色随机
     len = $(".blog_ui_tags .items a").length - 1;
     $(".blog_ui_tags .items a").each(function (i) {
-        var let = new Array('27ea80', '3366FF', 'ff5473', 'df27ea', '31ac76', 'ea4563', '31a6a0', '8e7daa', '4fad7b', 'f99f13', 'f85200', '666666');
+        var let = new Array('27ea80', '3366FF', 'ff5473', 'df27ea', '31ac76', 'ea4563', '31a6a0', '8e7daa', '4fad7b', 'f99f13', 'f85200', '666666','99ff99','99ccff','66ff99','FFEC8B','ffff66','99ff33','9900ff','00FFFF');
         var random1 = Math.floor(Math.random() * 12) + 0;
         var num = Math.floor(Math.random() * 5 + 12);
         $(this).attr('style', 'background:#' + let[random1] + '; opacity: 0.9;' + '');

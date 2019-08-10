@@ -14,8 +14,10 @@
 
                             </div>
                             <div class="panel-right">
-                                <h3>16,150</h3>
+
+                                <h3>{{ BlogView.query.first().num_of_view }}</h3>
                                 <strong> 总访问量</strong>
+
                             </div>
                         </div>
                     </div>
@@ -26,7 +28,7 @@
                             </div>
 
                             <div class="panel-right">
-                                <h3>25,550 </h3>
+                            <h3>{{ Article.query.count() }} &nbsp;&nbsp;&nbsp;</h3>
                                 <strong> 总博文数</strong>
 
                             </div>
@@ -39,7 +41,7 @@
 
                             </div>
                             <div class="panel-right">
-                                <h3>11,225 </h3>
+                                <h3>{{ Comment.query.count() }} &nbsp;&nbsp;&nbsp;</h3>
                                 <strong> 总评论数</strong>
 
                             </div>
@@ -48,12 +50,12 @@
                     <div class="col-md-3 col-sm-12 col-xs-12">
                         <div class="panel panel-primary text-center no-boder blue">
                             <div class="panel-left pull-left blue">
-                                <i class="fa fa-users fa-5x"></i>
+                                <i class="fa  fa-tags fa-5x"></i>
 
                             </div>
                             <div class="panel-right">
-                                <h3>72,525 </h3>
-                                <strong>总用户数</strong>
+                                <h3>{{ Tag.query.count() }} &nbsp;&nbsp;&nbsp; </h3>
+                                <strong>总标签数</strong>
 
                             </div>
                         </div>

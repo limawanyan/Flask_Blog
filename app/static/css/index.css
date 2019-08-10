@@ -167,3 +167,8 @@ ul.article-footer li a i{
 .blog-statistics:hover{
     box-shadow:4px 4px 10px #00000015;
 }
+.right-content .blog_ui_tags .items a{
+    margin: 0.5%;
+    color: #ffffff;
+    font-size: 13px;
+}

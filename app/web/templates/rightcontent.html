@@ -1,6 +1,21 @@
- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 blog-statistics">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 blog-statistics">
     <h4 class="left"><b>博客统计</b></h4>
     <p class="left">访问量:<span class="badge" style="margin-left: 2%">{{ BlogView.query.first().num_of_view }}</span></p>
-    <p class="left">博文总数:<span class="badge" style="margin-left: 2%;margin-right: 3%">{{ Article.query.count() }}</span>评论总数:<span class="badge" style="margin-left: 2%">9999</span>
-     </p>
- </div>
+    <p class="left">博文总数:<span class="badge" style="margin-left: 2%;margin-right: 3%">{{ Article.query.count() }}</span>评论总数:<span
+            class="badge" style="margin-left: 2%">9999</span>
+    </p>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 blog-statistics" style="margin-top:4%">
+    <h4 class="left"><b>标签云</b></h4>
+    <div class="blog_ui_tags">
+        <div class="items">
+            {% for item in Tag.query.all() %}
+
+            <a class="col-lg-2.5 btn btn-sm" href="{{url_for('Web.articleTag',id=item.tid)}}">{{ item.name }}</a>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
